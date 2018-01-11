@@ -1,10 +1,12 @@
 click==6.7
+enum34==1.1.6
 Flask==0.12.2
 Flask-Restless==1.0.0b2.dev0
 itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
 marshmallow==2.15.0
+marshmallow-enum==1.4.1
 marshmallow-jsonapi==0.16.0
 python-dateutil==2.6.1
 six==1.11.0
