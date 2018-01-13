@@ -22,7 +22,7 @@ class TestBase(TestCase):
 
     def tearDown(self):
         s.remove()
-        Base.metadata.drop_all()
+        #Base.metadata.drop_all()
 
 class TestModels(TestBase):
 

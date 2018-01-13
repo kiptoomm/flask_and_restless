@@ -7,7 +7,8 @@ from sqlalchemy import *
 app = flask.Flask(__name__)
 
 # Create our SQLAlchemy DB engine
-engine = create_engine('sqlite:///foobar.db')
+DATABASE_URI = 'mysql+pymysql://restless_test_admin:restless2018@localhost/restless_test'
+engine = create_engine(DATABASE_URI)
 Session = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 s = scoped_session(Session)
 
