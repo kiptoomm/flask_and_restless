@@ -1,14 +1,14 @@
-from enum import Enum
+import enum
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
 from sqlalchemy import ForeignKey, Column, Integer, String, Boolean, Enum
 from sqlalchemy.orm import backref, relationship
 from flask_and_restless import Base
 
 #Gender = Enum('Gender', ['M', 'F', 'U'])
-class Gender(Enum):
-    MALE = 'M'
-    FEMALE = 'F'
-    UNKNOWN = 'U'
+class Gender(enum.IntEnum):
+    MALE = 0
+    FEMALE = 1
+    UNKNOWN = 2
 
 class Author(Base):
     @declared_attr
@@ -19,7 +19,7 @@ class Author(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String(64))
     last_name = Column(String(64))
-    gender = Column(Enum, default=Gender.UNKNOWN)
+    gender = Column(Enum(Gender), default=Gender.UNKNOWN)
 
 class Book(Base):
     @declared_attr
