@@ -9,6 +9,7 @@ marshmallow==2.15.0
 marshmallow-enum==1.4.1
 marshmallow-jsonapi==0.16.0
 python-dateutil==2.6.1
+PyMySQL==0.7.11
 six==1.11.0
 SQLAlchemy==1.2.0b3
 Werkzeug==0.12.2
