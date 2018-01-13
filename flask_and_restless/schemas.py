@@ -1,10 +1,13 @@
 from marshmallow_jsonapi import  Schema, fields
 from flask_restless import DefaultSerializer, DefaultDeserializer
+from marshmallow_enum import EnumField
+from models import Gender
 
 class AuthorSchema(Schema):
     id = fields.Str(dump_only=True)
     first_name = fields.Str()
     last_name = fields.Str()
+    gender = EnumField(Gender)
 
     class Meta:
         type_ = 'author'
