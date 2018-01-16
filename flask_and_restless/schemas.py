@@ -25,10 +25,6 @@ class AuthorSchema(BaseSchema):
         type_ = 'author'
         model = Author
 
-    @post_load
-    def make_object(self, data):
-        return self.Meta.model(**data)
-
 class AuthorSerializer(DefaultSerializer):
     def serialize(self, instance, only=None):
         author_schema = AuthorSchema(only=only)
