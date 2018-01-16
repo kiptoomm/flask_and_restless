@@ -17,7 +17,6 @@ class BaseSchema(Schema):
         return self.Meta.model(**data)
 
 class AuthorSchema(BaseSchema):
-    id = fields.Str(dump_only=True)
     first_name = fields.Str()
     last_name = fields.Str()
     gender = EnumField(Gender)
