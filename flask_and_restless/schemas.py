@@ -25,20 +25,34 @@ class AuthorSchema(BaseSchema):
         type_ = 'author'
         model = Author
 
-class AuthorSerializer(DefaultSerializer):
+
+class MarshmallowSerializer(DefaultSerializer):
+
+    schema_class = None
+
     def serialize(self, instance, only=None):
-        author_schema = AuthorSchema(only=only)
-        return author_schema.dump(instance).data
+        schema = self.schema_class(only=only)
+        return schema.dump(instance).data
 
     def serialize_many(self, instances, only=None):
-        uthor_schema = AuthorSchema(many=True, only=only)
-        return uthor_schema.dump(instances).data
+        schema = self.schema_class(many=True, only=only)
+        return schema.dump(instances).data
 
-class AuthorDeserializer(DefaultDeserializer):
-    def serialize(self, instance, only=None):
-        author_schema = AuthorSchema(only=only)
-        return author_schema.load(instance).data
 
-    def serialize_many(self, instances, only=None):
-        author_schema = AuthorSchema(many=True, only=only)
-        return author_schema.load(instances).data
+class MarshmallowDeserializer(DefaultDeserializer):
+
+    schema_class = None
+
+    def deserialize(self, document):
+        schema = self.schema_class()
+        return schema.load(document).data
+
+    def deserialize_many(self, document):
+        schema = self.schema_class(many=True)
+        return schema.load(document).data
+
+class AuthorSerializer(MarshmallowSerializer):
+    schema_class = AuthorSchema
+
+class AuthorDeserializer(MarshmallowDeserializer):
+    schema_class = AuthorSchema
