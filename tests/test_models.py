@@ -2,6 +2,7 @@ import unittest
 from flask_testing import TestCase
 from flask_and_restless import app, db
 from flask_and_restless.models import Author, Book, Gender
+from flask_and_restless.schemas import AuthorSchema
 
 class TestBase(TestCase):
 
@@ -29,6 +30,12 @@ class TestModels(TestBase):
     def test_author(self):
         author = db.session.query(Author).get(1)
         self.assertEqual(author.first_name, 'first1')
+
+    def test_author_schema(self):
+        author = Author(first_name='abc', last_name='xyz', gender=Gender.MALE)
+        schema = AuthorSchema()
+        data, errors = schema.dump(author)
+        print data, errors
 
 
 if __name__ == '__main__':
