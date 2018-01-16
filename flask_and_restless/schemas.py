@@ -1,7 +1,8 @@
 from marshmallow_jsonapi import  Schema, fields
 from flask_restless import DefaultSerializer, DefaultDeserializer
 from marshmallow_enum import EnumField
-from models import Gender
+from marshmallow import post_load
+from models import Gender, Author
 
 class AuthorSchema(Schema):
     id = fields.Str(dump_only=True)
@@ -11,7 +12,12 @@ class AuthorSchema(Schema):
 
     class Meta:
         type_ = 'author'
+        model = Author
         strict = True
+
+    @post_load
+    def make_object(self, data):
+        return self.Meta.model(**data)
 
 class AuthorSerializer(DefaultSerializer):
     def serialize(self, instance, only=None):
