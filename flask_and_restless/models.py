@@ -10,7 +10,14 @@ class Gender(enum.IntEnum):
     FEMALE = 1
     UNKNOWN = 2
 
-class Author(db.Model):
+class BaseModel(db.Model):
+    '''
+    defines an abstract base model from which all project modules inherit
+    common fields and methods
+    '''
+    __abstract__ = True
+
+class Author(BaseModel):
     @declared_attr
     def __tablename__(cls):
         # API endpoint will take the form '/api/__tablename__'
