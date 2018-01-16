@@ -1,4 +1,4 @@
-from flask_and_restless import app, s, manager
+from flask_and_restless import app, db, manager
 from flask_and_restless.models\
     import Book, Author
 from schemas import AuthorSerializer, AuthorDeserializer

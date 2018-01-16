@@ -1,26 +1,18 @@
 import flask
 import flask_restless
-from sqlalchemy.ext.declarative import declarative_base, declared_attr
-from sqlalchemy.orm import sessionmaker, scoped_session
-from sqlalchemy import *
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
 app = flask.Flask(__name__)
 
-# Create our SQLAlchemy DB engine
 DATABASE_URI = 'mysql+pymysql://restless_test_admin:restless2018@localhost/restless_test'
-engine = create_engine(DATABASE_URI)
-Session = sessionmaker(bind=engine, autocommit=False, autoflush=False)
-s = scoped_session(Session)
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
 
-Base = declarative_base()
-Base.metadata.bind = engine
+db.init_app(app)
 
-# Import all models to add them to Base.metadata
 from models import Book, Author
 
-Base.metadata.create_all()
-
-manager = flask_restless.APIManager(app, session=s)
+manager = flask_restless.APIManager(app, session=db.session)
 # Register flask-restless blueprints to instantiate CRUD endpoints
 from controllers import book_api_blueprint, author_api_blueprint
 

@@ -1,8 +1,8 @@
 import enum
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
-from sqlalchemy import ForeignKey, Column, Integer, String, Boolean, Enum
+from sqlalchemy import ForeignKey, Column, Integer, String, Boolean
 from sqlalchemy.orm import backref, relationship
-from flask_and_restless import Base
+from flask_and_restless import db
 
 #Gender = Enum('Gender', ['M', 'F', 'U'])
 class Gender(enum.IntEnum):
@@ -10,7 +10,7 @@ class Gender(enum.IntEnum):
     FEMALE = 1
     UNKNOWN = 2
 
-class Author(Base):
+class Author(db.Model):
     @declared_attr
     def __tablename__(cls):
         # API endpoint will take the form '/api/__tablename__'
@@ -19,9 +19,9 @@ class Author(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String(64))
     last_name = Column(String(64))
-    gender = Column(Enum(Gender), default=Gender.UNKNOWN)
+    gender = db.Column(db.Enum(Gender), default=Gender.UNKNOWN)
 
-class Book(Base):
+class Book(db.Model):
     @declared_attr
     def __tablename__(cls):
         return cls.__name__.lower()
