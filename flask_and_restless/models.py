@@ -1,4 +1,5 @@
 import enum
+from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
 from sqlalchemy import ForeignKey, Column, Integer, String, Boolean
 from sqlalchemy.orm import backref, relationship
@@ -27,6 +28,9 @@ class Author(BaseModel):
     first_name = Column(String(64))
     last_name = Column(String(64))
     gender = db.Column(db.Enum(Gender), default=Gender.UNKNOWN)
+    # timestamp fields
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
 class Book(db.Model):
     @declared_attr
