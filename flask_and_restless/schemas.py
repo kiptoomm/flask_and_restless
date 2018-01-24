@@ -20,6 +20,8 @@ class AuthorSchema(BaseSchema):
     first_name = fields.Str()
     last_name = fields.Str()
     gender = EnumField(Gender)
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()
 
     class Meta(BaseSchema.Meta):
         type_ = 'author'
@@ -32,6 +34,8 @@ class MarshmallowSerializer(DefaultSerializer):
 
     def serialize(self, instance, only=None):
         schema = self.schema_class(only=only)
+        print '-------------serialize-----------------\n'
+        #raise Exception(instance.__dict__)
         return schema.dump(instance).data
 
     def serialize_many(self, instances, only=None):
@@ -45,7 +49,9 @@ class MarshmallowDeserializer(DefaultDeserializer):
 
     def deserialize(self, document):
         schema = self.schema_class()
-        return schema.load(document).data
+        print '-------------deserialize-----------------\n'
+        raise Exception(document.__dict__)
+        #return schema.load(document).data
 
     def deserialize_many(self, document):
         schema = self.schema_class(many=True)
