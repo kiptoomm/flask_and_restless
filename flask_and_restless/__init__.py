@@ -16,3 +16,5 @@ manager = flask_restless.APIManager(app, session=db.session)
 # Register flask-restless blueprints to instantiate CRUD endpoints
 from controllers import book_api_blueprint, author_api_blueprint
 
+from restful_api import AuthorResource
+
