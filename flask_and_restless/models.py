@@ -29,8 +29,6 @@ class Author(BaseModel):
     last_name = Column(String(64))
     gender = db.Column(db.Enum(Gender), default=Gender.UNKNOWN)
     # timestamp fields
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
 class Book(db.Model):
     @declared_attr
