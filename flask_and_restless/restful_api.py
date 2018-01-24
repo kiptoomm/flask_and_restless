@@ -3,8 +3,13 @@ from flask_and_restless import models, app
 
 api = Api(app)
 
-class AuthorResource(Resource):
-    def get(self):
-        return {'hello': 'world'}
+class AuthorAPI(Resource):
+    def get(self, author_id):
+        return {'hello': 'world' + author_id}
 
-api.add_resource(AuthorResource, '/restful/')
+class AuthorAPIList(Resource):
+    def get(self):
+        return {'hellos': 'world'}
+
+api.add_resource(AuthorAPI, '/restful/authors/<author_id>')
+api.add_resource(AuthorAPIList, '/restful/authors/')
