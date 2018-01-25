@@ -34,8 +34,6 @@ class MarshmallowSerializer(DefaultSerializer):
 
     def serialize(self, instance, only=None):
         schema = self.schema_class(only=only)
-        print '-------------serialize-----------------\n'
-        #raise Exception(instance.__dict__)
         return schema.dump(instance).data
 
     def serialize_many(self, instances, only=None):
@@ -49,9 +47,7 @@ class MarshmallowDeserializer(DefaultDeserializer):
 
     def deserialize(self, document):
         schema = self.schema_class()
-        print '-------------deserialize-----------------\n'
-        raise Exception(document.__dict__)
-        #return schema.load(document).data
+        return schema.load(document).data
 
     def deserialize_many(self, document):
         schema = self.schema_class(many=True)

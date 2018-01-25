@@ -1,5 +1,6 @@
-from flask_restful import Resource, Api, fields, marshal
-from flask_and_restless import models, app, schemas
+from flask_restful import Resource, Api, fields, marshal, reqparse
+from flask_and_restless import models, app, schemas, db
+from flask import request
 
 api = Api(app)
 
@@ -14,6 +15,20 @@ class AuthorAPI(Resource):
         author = models.Author.query.get(author_id)
         author_serializer = schemas.AuthorSerializer()
         return author_serializer.serialize(author)
+
+    def patch(self, author_id):
+        author = models.Author.query.get(author_id)
+        author_schema = schemas.AuthorSchema()
+        args = request.get_json()
+        author_s, errors = author_schema.load(args)
+        print 'deserialized, type: , errors: ', author_s.__dict__, type(author_s), errors
+
+        for k, v in author_s.__dict__.iteritems():
+            print 'k = {}, v = {}'.format(k, v)
+            if v != None:
+                setattr(author, k, v)
+        db.session.commit()
+        #return author_serializer.serialize(author)
 
 class AuthorAPIList(Resource):
     def get(self):
