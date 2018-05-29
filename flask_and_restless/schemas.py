@@ -2,7 +2,7 @@ from marshmallow_jsonapi import  Schema, fields
 from flask_restless import DefaultSerializer, DefaultDeserializer
 from marshmallow_enum import EnumField
 from marshmallow import post_load
-from models import Gender, Author, BaseModel
+from models import Gender, Author, BaseModel, Book
 
 
 class BaseSchema(Schema):
@@ -26,6 +26,17 @@ class AuthorSchema(BaseSchema):
     class Meta(BaseSchema.Meta):
         type_ = 'author'
         model = Author
+
+class BookSchema(BaseSchema):
+    title = fields.Str()
+    author_id = fields.Int()
+    is_available = fields.Boolean()
+    author = fields.Nested('flask_and_restless.schemas.AuthorSchema', many=False)
+
+    class Meta(BaseSchema.Meta):
+        type_ = 'book'
+        model = Book
+
 
 
 class MarshmallowSerializer(DefaultSerializer):
@@ -58,3 +69,9 @@ class AuthorSerializer(MarshmallowSerializer):
 
 class AuthorDeserializer(MarshmallowDeserializer):
     schema_class = AuthorSchema
+
+class BookSerializer(MarshmallowSerializer):
+    schema_class = BookSchema
+
+class BookDeserializer(MarshmallowDeserializer):
+    schema_class = BookSchema

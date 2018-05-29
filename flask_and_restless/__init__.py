@@ -1,5 +1,5 @@
 import flask
-import flask_restless
+from flask_restless import APIManager
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -12,9 +12,8 @@ db.init_app(app)
 
 from models import Book, Author
 
-manager = flask_restless.APIManager(app, session=db.session)
+manager = APIManager(app, session=db.session)
 # Register flask-restless blueprints to instantiate CRUD endpoints
 from controllers import book_api_blueprint, author_api_blueprint
 
-import restful_api
 

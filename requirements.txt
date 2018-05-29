@@ -4,6 +4,7 @@ click==6.7
 enum34==1.1.6
 Flask==0.12.2
 Flask-RESTful==0.3.6
+Flask-Restless==1.0.0b2.dev0
 Flask-SQLAlchemy==2.3.2
 Flask-Testing==0.7.1
 funcsigs==1.0.2
