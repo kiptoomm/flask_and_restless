@@ -32,7 +32,7 @@ class Author(BaseModel):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
-class Book(db.Model):
+class Book(BaseModel):
     @declared_attr
     def __tablename__(cls):
         return cls.__name__.lower()
