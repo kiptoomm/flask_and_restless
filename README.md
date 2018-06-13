@@ -1,26 +1,31 @@
 # flask_and_restless
-creates basic app following tutorial on http://thelaziestprogrammer.com/sharrington/web-development/sqlalchemy-defined-rest-api
+creates basic app based on the tutorial at http://thelaziestprogrammer.com/sharrington/web-development/sqlalchemy-defined-rest-api
 
-## requirements
+## quick setup to test the app locally (on your dev machine)
 from project root:
 
-`pip install -r requirements.txt`
+* create and activate a virtual environment with virtualenv or equivalent:
 
-*note*: you may run into trouble installing the flask-restless dependency. We had to use the dev version of the library as the latest features are not in a public release yet. So you might have to install it directly from source (remove the flask-restless entry from requirements.txt first):
+  `virtualenv venv`; `source venv/bin/activate`
+        
+* install required dependencies into your virtual env
+* [Bundle 3rd-party libraries](https://cloud.google.com/appengine/docs/standard/python/tools/using-libraries-python-27) into a folder (usually named 'lib') so that the GAE script `appengine_config.py` can find the dependencies. We have a script to somewhat automate this part:
 
-`pip install git+https://github.com/jfinkels/flask-restless.git`
+    `source gae_install_libs.sh`  
+* install the [GCP SDK](https://cloud.google.com/appengine/docs/standard/go/download) (`gcloud` tool) if you don't have it set up already
+so you can connect to the Google Cloud SQL where the project/database is hosted
+* Ensure you're in the right GCP project:
 
-## database setup
-relies on mysql+pymsql driver (installation on your local machine is assumed). 
-run these commands to create the database:
+        `gcloud config list`
 
-`CREATE DATABASE restless_test;`
+        ... or switch to the right one with:
+        
+        `gcloud config set project flask-and-restless`
 
-`CREATE USER 'restless_test_admin'@'localhost' IDENTIFIED BY 'restless2018';`
+* run the local server and launch the app as: 
 
-`GRANT ALL PRIVILEGES ON restless_test . * TO 'restless_test_admin'@'localhost';`
+    `dev_appserver app-dev.yaml` 
 
+* You should now be able to access the endpoints such as: `http://localhost:8080/api/author/1/books`
 
-## from project root, run as: 
-`$ python run.py` 
 
