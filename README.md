@@ -28,4 +28,21 @@ so you can connect to the Google Cloud SQL where the project/database is hosted
 
 * You should now be able to access the endpoints such as: `http://localhost:8080/api/author/1/books`
 
+## generating test data
+### using filldb.info:
+1. `$ python generate_data.py # generates the schema file 'mock_data_schema.sql'` 
+
+upload or copy the contents of the schema file into [filldb](http://filldb.info/dummy/step1)
+2. generate the full (or partial) database file (a .sql) and download it
+3. connect to the mysql database (CloudSQL) instance:
+
+    `./cloud_sql_proxy -instances=flask-and-restless:europe-west1:flask-restless-db=tcp:3306`
+    
+4. import data into the mysql database (might re-create tables, remove the drop/create) directives
+in the file if you don't want a complete rewrite:
+
+    `mysql -u root -p flask_restless_db < databasefilefromfilldb.sql --host 127.0.0.1`
+    
+    if you see errors like `RROR 1217 (23000) at line 5: Cannot delete or update a parent row: a foreign key constraint fails`:
+    rearrange the order of, or remove, the drop/create statements so foreign key constraints are satisfied
 
