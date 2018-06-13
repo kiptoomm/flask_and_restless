@@ -1,0 +1,25 @@
+# app.yaml for development config - GAE standard - environment
+# todo: find alternative solution so we don't have to maintain different
+# todo: versions of this file
+
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /static
+  static_dir: static
+- url: /.*
+  script: main.app
+
+#[START env]
+env_variables:
+  FLASK_CONFIG: development
+  CLOUDSQL_CONNECTION_NAME: flask-and-restless:europe-west1:flask-restless-db
+  CLOUDSQL_USER: root
+  CLOUDSQL_PASSWORD: testpassword
+#[END env]
+
+libraries:
+- name: MySQLdb
+  version: "latest"

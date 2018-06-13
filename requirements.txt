@@ -4,7 +4,7 @@ click==6.7
 enum34==1.1.6
 Flask==0.12.2
 Flask-RESTful==0.3.6
-Flask-Restless==1.0.0b2.dev0
+git+https://github.com/jfinkels/flask-restless.git@8e32477
 Flask-SQLAlchemy==2.3.2
 Flask-Testing==0.7.1
 funcsigs==1.0.2
@@ -14,6 +14,7 @@ MarkupSafe==1.0
 marshmallow==2.15.0
 marshmallow-enum==1.4.1
 marshmallow-jsonapi==0.16.0
+MySQL-python==1.2.5
 pluggy==0.6.0
 py==1.5.2
 PyMySQL==0.7.11
