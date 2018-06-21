@@ -1,7 +1,27 @@
 # flask_and_restless
 creates basic app based on the tutorial at http://thelaziestprogrammer.com/sharrington/web-development/sqlalchemy-defined-rest-api
 
-## quick setup to test the app locally (on your dev machine)
+## quick setup with vagrant
+This setup is adapted from the [vagrant-gcloud](https://github.com/laander/vagrant-gcloud) project
+
+Ideally, you should still work in a virtual env to isolate your environment
+
+1. install [vagrant](https://www.vagrantup.com/docs/installation/) and [virtualbox](https://www.virtualbox.org/wiki/Downloads)
+2. clone this repo and `cd` to the project root
+3. provision the ubuntu VM with vagrant (configured from `Vagrantfile` in the root directory):
+
+    `vagrant up`
+    
+4. SSH enter into the VM:
+
+    `vagrant ssh`
+    
+    * you might need to manually cd into the [synced folder](https://www.vagrantup.com/docs/synced-folders/) (usually /vagrant), where the project files will be located on the guest machine: `cd /vagrant`)
+    * the machine should be ready to use, with all the required dependencies installed. proceed with the rest of the operations that you need to run. for example, run the app locally in the VM, you do so as you would in your host machine:
+    
+    `dev_appserver app-dev.yaml`
+
+## manual setup to test the app locally (on your dev machine)
 from project root:
 
 * create and activate a virtual environment with virtualenv or equivalent:
