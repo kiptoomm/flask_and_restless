@@ -4,7 +4,7 @@ creates basic app based on the tutorial at http://thelaziestprogrammer.com/sharr
 ## quick setup with vagrant
 This setup is adapted from the [vagrant-gcloud](https://github.com/laander/vagrant-gcloud) project
 
-Ideally, you should still work in a virtual env to isolate your environment
+Ideally, you should still work in a virtual env to isolate dependencies specific to this project from the rest of your machine's
 
 1. install [vagrant](https://www.vagrantup.com/docs/installation/) and [virtualbox](https://www.virtualbox.org/wiki/Downloads)
 2. clone this repo and `cd` to the project root
@@ -12,14 +12,31 @@ Ideally, you should still work in a virtual env to isolate your environment
 
     `vagrant up`
     
-4. SSH enter into the VM:
+4. enter into the VM with SSH:
 
     `vagrant ssh`
     
-    * you might need to manually cd into the [synced folder](https://www.vagrantup.com/docs/synced-folders/) (usually /vagrant), where the project files will be located on the guest machine: `cd /vagrant`)
+    * Authenticate the gcloud CLI to your google account
+
+        `gcloud auth login`
+
+    * Define the GAE project name for the gcloud utility to use (as set up in Google Console)
+
+        `gcloud config set project 'your-project-name'`
+        
+    * you might need to manually cd into the [synced folder](https://www.vagrantup.com/docs/synced-folders/) (usually /vagrant), where the project files will be located on the guest machine: `cd /vagrant`
     * the machine should be ready to use, with all the required dependencies installed. proceed with the rest of the operations that you need to run. for example, run the app locally in the VM, you do so as you would in your host machine:
     
     `dev_appserver app-dev.yaml`
+    
+    assuming you have already started the CloudSQL proxy client (installed in vagrant's home directory):
+    
+    `~/cloud_sql_proxy -instances=<project instance name>=tcp:3306`
+    
+    If you encounter an error like `google: could not find default credentials. See https://developers.google.com/accounts/docs/application-default-credentials for more information.`, you might have to set app default credentials first:
+    
+    `gcloud auth application-default login`
+    
 
 ## manual setup to test the app locally (on your dev machine)
 from project root:
